@@ -1,21 +1,13 @@
 package utils
 
 import (
-	"bytes"
-	jsoniter "github.com/json-iterator/go"
+	"encoding/json"
 )
 
 func Marshal(i interface{}) ([]byte, error) {
-	buffer := bytes.NewBuffer([]byte{})
-	encoder := jsoniter.NewEncoder(buffer)
-	encoder.SetEscapeHTML(false)
-	err := encoder.Encode(i)
-	return buffer.Bytes(), err
+	return json.Marshal(i)
 }
 
 func Unmarshal(data []byte, i interface{}) error {
-	reader := bytes.NewReader(data)
-	decoder := jsoniter.NewDecoder(reader)
-	decoder.UseNumber()
-	return decoder.Decode(i)
+	return json.Unmarshal(data, i)
 }
