@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-// 实例配置信息
+// InstanceConfig 实例配置信息
 type InstanceConfig struct {
 
 	// 云服务器ID，当使用已存在的云服务器的规格为模板创建弹性伸缩配置时传入该字段，此时flavorRef、imageRef、disk、security_groups、tenancy和dedicated_host_id字段不生效。当不传入instance_id字段时flavorRef、imageRef、disk字段为必选。
@@ -24,7 +24,7 @@ type InstanceConfig struct {
 	// 磁盘组信息，系统盘必选，数据盘可选。
 	Disk *[]DiskInfo `json:"disk,omitempty"`
 
-	// 登录云服务器的SSH密钥名称。  获取密钥对方式请参考[创建及导入SSH密钥对](https://support.huaweicloud.com/api-dew/CreateKeypair.html)。  说明： 当key_name与user_data同时指定时，user_data只做用户数据注入。
+	// 登录云服务器的SSH密钥名称。获取密钥对方式请参考[创建及导入SSH密钥对](https://support.huaweicloud.com/api-dew/CreateKeypair.html)。说明：当key_name与user_data同时指定时，user_data只做用户数据注入。
 	KeyName *string `json:"key_name,omitempty"`
 
 	// 注入文件信息。仅支持注入文本文件，最大支持注入5个文件，每个文件最大1KB。
@@ -91,13 +91,18 @@ func (c InstanceConfigTenancy) MarshalJSON() ([]byte, error) {
 
 func (c *InstanceConfigTenancy) UnmarshalJSON(b []byte) error {
 	myConverter := converter.StringConverterFactory("string")
-	if myConverter != nil {
-		val, err := myConverter.CovertStringToInterface(strings.Trim(string(b[:]), "\""))
-		if err == nil {
-			c.value = val.(string)
-			return nil
-		}
+	if myConverter == nil {
+		return errors.New("unsupported StringConverter type: string")
+	}
+
+	interf, err := myConverter.CovertStringToInterface(strings.Trim(string(b[:]), "\""))
+	if err != nil {
 		return err
+	}
+
+	if val, ok := interf.(string); ok {
+		c.value = val
+		return nil
 	} else {
 		return errors.New("convert enum data to string error")
 	}
@@ -133,13 +138,18 @@ func (c InstanceConfigMultiFlavorPriorityPolicy) MarshalJSON() ([]byte, error) {
 
 func (c *InstanceConfigMultiFlavorPriorityPolicy) UnmarshalJSON(b []byte) error {
 	myConverter := converter.StringConverterFactory("string")
-	if myConverter != nil {
-		val, err := myConverter.CovertStringToInterface(strings.Trim(string(b[:]), "\""))
-		if err == nil {
-			c.value = val.(string)
-			return nil
-		}
+	if myConverter == nil {
+		return errors.New("unsupported StringConverter type: string")
+	}
+
+	interf, err := myConverter.CovertStringToInterface(strings.Trim(string(b[:]), "\""))
+	if err != nil {
 		return err
+	}
+
+	if val, ok := interf.(string); ok {
+		c.value = val
+		return nil
 	} else {
 		return errors.New("convert enum data to string error")
 	}
@@ -171,13 +181,18 @@ func (c InstanceConfigMarketType) MarshalJSON() ([]byte, error) {
 
 func (c *InstanceConfigMarketType) UnmarshalJSON(b []byte) error {
 	myConverter := converter.StringConverterFactory("string")
-	if myConverter != nil {
-		val, err := myConverter.CovertStringToInterface(strings.Trim(string(b[:]), "\""))
-		if err == nil {
-			c.value = val.(string)
-			return nil
-		}
+	if myConverter == nil {
+		return errors.New("unsupported StringConverter type: string")
+	}
+
+	interf, err := myConverter.CovertStringToInterface(strings.Trim(string(b[:]), "\""))
+	if err != nil {
 		return err
+	}
+
+	if val, ok := interf.(string); ok {
+		c.value = val
+		return nil
 	} else {
 		return errors.New("convert enum data to string error")
 	}

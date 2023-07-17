@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-// 伸缩策略
+// ScalingV1PolicyDetail 伸缩策略
 type ScalingV1PolicyDetail struct {
 
 	// 伸缩组ID。
@@ -21,7 +21,7 @@ type ScalingV1PolicyDetail struct {
 	// 伸缩策略ID。
 	ScalingPolicyId *string `json:"scaling_policy_id,omitempty"`
 
-	// 伸缩策略状态  INSERVICE：已启用 PAUSED：已停用 EXECUTING：执行中
+	// 伸缩策略状态 INSERVICE：已启用 PAUSED：已停用 EXECUTING：执行中
 	PolicyStatus *string `json:"policy_status,omitempty"`
 
 	// 伸缩策略类型：ALARM：告警策略，此时alarm_id有返回，scheduled_policy不会返回。SCHEDULED：定时策略，此时alarm_id不会返回，scheduled_policy有返回，并且recurrence_type、recurrence_value、start_time和end_time不会返回。RECURRENCE：周期策略，此时alarm_id不会返回，scheduled_policy有返回，并且recurrence_type、recurrence_value、start_time和end_time有返回。
@@ -84,13 +84,18 @@ func (c ScalingV1PolicyDetailScalingPolicyType) MarshalJSON() ([]byte, error) {
 
 func (c *ScalingV1PolicyDetailScalingPolicyType) UnmarshalJSON(b []byte) error {
 	myConverter := converter.StringConverterFactory("string")
-	if myConverter != nil {
-		val, err := myConverter.CovertStringToInterface(strings.Trim(string(b[:]), "\""))
-		if err == nil {
-			c.value = val.(string)
-			return nil
-		}
+	if myConverter == nil {
+		return errors.New("unsupported StringConverter type: string")
+	}
+
+	interf, err := myConverter.CovertStringToInterface(strings.Trim(string(b[:]), "\""))
+	if err != nil {
 		return err
+	}
+
+	if val, ok := interf.(string); ok {
+		c.value = val
+		return nil
 	} else {
 		return errors.New("convert enum data to string error")
 	}

@@ -9,12 +9,13 @@ import (
 	"strings"
 )
 
+// Access 访问方式。
 type Access struct {
 
-	// 地址。
+	// 访问地址。
 	Address *string `json:"address,omitempty"`
 
-	// 类型。
+	// 访问方式类型。
 	Type *AccessType `json:"type,omitempty"`
 }
 
@@ -57,13 +58,18 @@ func (c AccessType) MarshalJSON() ([]byte, error) {
 
 func (c *AccessType) UnmarshalJSON(b []byte) error {
 	myConverter := converter.StringConverterFactory("string")
-	if myConverter != nil {
-		val, err := myConverter.CovertStringToInterface(strings.Trim(string(b[:]), "\""))
-		if err == nil {
-			c.value = val.(string)
-			return nil
-		}
+	if myConverter == nil {
+		return errors.New("unsupported StringConverter type: string")
+	}
+
+	interf, err := myConverter.CovertStringToInterface(strings.Trim(string(b[:]), "\""))
+	if err != nil {
 		return err
+	}
+
+	if val, ok := interf.(string); ok {
+		c.value = val
+		return nil
 	} else {
 		return errors.New("convert enum data to string error")
 	}

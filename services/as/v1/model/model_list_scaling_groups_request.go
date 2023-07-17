@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-// Request Object
+// ListScalingGroupsRequest Request Object
 type ListScalingGroupsRequest struct {
 
 	// 伸缩组名称
@@ -27,7 +27,7 @@ type ListScalingGroupsRequest struct {
 	// 查询的记录条数，默认为20。取值范围为：0~100。
 	Limit *int32 `json:"limit,omitempty"`
 
-	// 企业项目ID，当传入all_granted_eps时表示查询该用户所有授权的企业项目下的伸缩组列表，如何获取企业项目ID，请参考[查询企业项目列表](https://support.huaweicloud.com/api-em/zh-cn_topic_0121230880.html)。  说明： 华为云帐号和拥有全局权限的IAM用户可以查询该用户所有伸缩组列表。  授予部分企业项目的IAM用户，如果拥有超过100个企业项目，则只能返回有权限的前100个企业项目对应的伸缩组列表。
+	// 企业项目ID，当传入all_granted_eps时表示查询该用户所有授权的企业项目下的伸缩组列表，如何获取企业项目ID，请参考[查询企业项目列表](https://support.huaweicloud.com/api-em/zh-cn_topic_0121230880.html)。说明：华为云帐号和拥有全局权限的IAM用户可以查询该用户所有伸缩组列表。授予部分企业项目的IAM用户，如果拥有超过100个企业项目，则只能返回有权限的前100个企业项目对应的伸缩组列表。
 	EnterpriseProjectId *string `json:"enterprise_project_id,omitempty"`
 }
 
@@ -78,13 +78,18 @@ func (c ListScalingGroupsRequestScalingGroupStatus) MarshalJSON() ([]byte, error
 
 func (c *ListScalingGroupsRequestScalingGroupStatus) UnmarshalJSON(b []byte) error {
 	myConverter := converter.StringConverterFactory("string")
-	if myConverter != nil {
-		val, err := myConverter.CovertStringToInterface(strings.Trim(string(b[:]), "\""))
-		if err == nil {
-			c.value = val.(string)
-			return nil
-		}
+	if myConverter == nil {
+		return errors.New("unsupported StringConverter type: string")
+	}
+
+	interf, err := myConverter.CovertStringToInterface(strings.Trim(string(b[:]), "\""))
+	if err != nil {
 		return err
+	}
+
+	if val, ok := interf.(string); ok {
+		c.value = val
+		return nil
 	} else {
 		return errors.New("convert enum data to string error")
 	}

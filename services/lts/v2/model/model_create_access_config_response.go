@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-// Response Object
+// CreateAccessConfigResponse Response Object
 type CreateAccessConfigResponse struct {
 
 	// 日志接入ID
@@ -18,20 +18,27 @@ type CreateAccessConfigResponse struct {
 	// 日志接入名称
 	AccessConfigName *string `json:"access_config_name,omitempty"`
 
-	// 日志接入类型。AGENT：主机接入
+	// 日志接入类型。AGENT：ECS接入  K8S_CCE: CCE接入
 	AccessConfigType *CreateAccessConfigResponseAccessConfigType `json:"access_config_type,omitempty"`
 
 	// 创建时间
 	CreateTime *int64 `json:"create_time,omitempty"`
 
-	AccessConfigDetail *AccessConfigDeatil `json:"access_config_detail,omitempty"`
+	AccessConfigDetail *AccessConfigDeatilCreate `json:"access_config_detail,omitempty"`
 
 	LogInfo *AccessConfigQueryLogInfo `json:"log_info,omitempty"`
 
 	HostGroupInfo *AccessConfigHostGroupIdList `json:"host_group_info,omitempty"`
 
+	// 标签信息。KEY不能重复,最多20个标签
 	AccessConfigTag *[]AccessConfigTag `json:"access_config_tag,omitempty"`
-	HttpStatusCode  int                `json:"-"`
+
+	// 二进制采集
+	LogSplit *bool `json:"log_split,omitempty"`
+
+	// 日志拆分
+	BinaryCollect  *bool `json:"binary_collect,omitempty"`
+	HttpStatusCode int   `json:"-"`
 }
 
 func (o CreateAccessConfigResponse) String() string {
@@ -48,13 +55,17 @@ type CreateAccessConfigResponseAccessConfigType struct {
 }
 
 type CreateAccessConfigResponseAccessConfigTypeEnum struct {
-	AGENT CreateAccessConfigResponseAccessConfigType
+	AGENT    CreateAccessConfigResponseAccessConfigType
+	K8_S_CCE CreateAccessConfigResponseAccessConfigType
 }
 
 func GetCreateAccessConfigResponseAccessConfigTypeEnum() CreateAccessConfigResponseAccessConfigTypeEnum {
 	return CreateAccessConfigResponseAccessConfigTypeEnum{
 		AGENT: CreateAccessConfigResponseAccessConfigType{
 			value: "AGENT",
+		},
+		K8_S_CCE: CreateAccessConfigResponseAccessConfigType{
+			value: "K8S_CCE",
 		},
 	}
 }
@@ -69,13 +80,18 @@ func (c CreateAccessConfigResponseAccessConfigType) MarshalJSON() ([]byte, error
 
 func (c *CreateAccessConfigResponseAccessConfigType) UnmarshalJSON(b []byte) error {
 	myConverter := converter.StringConverterFactory("string")
-	if myConverter != nil {
-		val, err := myConverter.CovertStringToInterface(strings.Trim(string(b[:]), "\""))
-		if err == nil {
-			c.value = val.(string)
-			return nil
-		}
+	if myConverter == nil {
+		return errors.New("unsupported StringConverter type: string")
+	}
+
+	interf, err := myConverter.CovertStringToInterface(strings.Trim(string(b[:]), "\""))
+	if err != nil {
 		return err
+	}
+
+	if val, ok := interf.(string); ok {
+		c.value = val
+		return nil
 	} else {
 		return errors.New("convert enum data to string error")
 	}

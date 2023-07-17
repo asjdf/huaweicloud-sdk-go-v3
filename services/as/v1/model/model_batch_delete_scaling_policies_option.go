@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-// 批量操作弹性伸缩策略
+// BatchDeleteScalingPoliciesOption 批量操作弹性伸缩策略
 type BatchDeleteScalingPoliciesOption struct {
 
 	// 伸缩策略ID。
@@ -21,7 +21,7 @@ type BatchDeleteScalingPoliciesOption struct {
 	// 批量操作伸缩策略action标识：删除：delete。启用：resume。停止：pause。
 	Action BatchDeleteScalingPoliciesOptionAction `json:"action"`
 
-	// 是否删除告警策略使用的告警规则。可选值为yes或no，默认为no。  只有action为delete时，该字段才生效。
+	// 是否删除告警策略使用的告警规则。可选值为yes或no，默认为no。 只有action为delete时，该字段才生效。
 	DeleteAlarm *string `json:"delete_alarm,omitempty"`
 }
 
@@ -64,13 +64,18 @@ func (c BatchDeleteScalingPoliciesOptionForceDelete) MarshalJSON() ([]byte, erro
 
 func (c *BatchDeleteScalingPoliciesOptionForceDelete) UnmarshalJSON(b []byte) error {
 	myConverter := converter.StringConverterFactory("string")
-	if myConverter != nil {
-		val, err := myConverter.CovertStringToInterface(strings.Trim(string(b[:]), "\""))
-		if err == nil {
-			c.value = val.(string)
-			return nil
-		}
+	if myConverter == nil {
+		return errors.New("unsupported StringConverter type: string")
+	}
+
+	interf, err := myConverter.CovertStringToInterface(strings.Trim(string(b[:]), "\""))
+	if err != nil {
 		return err
+	}
+
+	if val, ok := interf.(string); ok {
+		c.value = val
+		return nil
 	} else {
 		return errors.New("convert enum data to string error")
 	}
@@ -102,13 +107,18 @@ func (c BatchDeleteScalingPoliciesOptionAction) MarshalJSON() ([]byte, error) {
 
 func (c *BatchDeleteScalingPoliciesOptionAction) UnmarshalJSON(b []byte) error {
 	myConverter := converter.StringConverterFactory("string")
-	if myConverter != nil {
-		val, err := myConverter.CovertStringToInterface(strings.Trim(string(b[:]), "\""))
-		if err == nil {
-			c.value = val.(string)
-			return nil
-		}
+	if myConverter == nil {
+		return errors.New("unsupported StringConverter type: string")
+	}
+
+	interf, err := myConverter.CovertStringToInterface(strings.Trim(string(b[:]), "\""))
+	if err != nil {
 		return err
+	}
+
+	if val, ok := interf.(string); ok {
+		c.value = val
+		return nil
 	} else {
 		return errors.New("convert enum data to string error")
 	}

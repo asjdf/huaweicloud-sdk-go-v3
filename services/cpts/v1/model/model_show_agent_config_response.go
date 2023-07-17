@@ -6,12 +6,16 @@ import (
 	"strings"
 )
 
-// Response Object
+// ShowAgentConfigResponse Response Object
 type ShowAgentConfigResponse struct {
+
+	// 响应码
 	Code *string `json:"code,omitempty"`
 
+	// 响应消息
 	Message *string `json:"message,omitempty"`
 
+	// 扩展信息
 	Extend *interface{} `json:"extend,omitempty"`
 
 	Result         *AgentConfig `json:"result,omitempty"`

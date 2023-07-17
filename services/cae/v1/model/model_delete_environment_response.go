@@ -6,10 +6,10 @@ import (
 	"strings"
 )
 
-// Response Object
+// DeleteEnvironmentResponse Response Object
 type DeleteEnvironmentResponse struct {
 
-	// 任务id。
+	// 任务ID。
 	JobId          *string `json:"job_id,omitempty"`
 	HttpStatusCode int     `json:"-"`
 }

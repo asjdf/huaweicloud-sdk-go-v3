@@ -9,19 +9,19 @@ import (
 	"strings"
 )
 
-// 公网IP绑定的带宽信息
+// BandwidthInfoResp 弹性公网IP绑定的带宽信息
 type BandwidthInfoResp struct {
 
-	// 带宽名称
+	// - 功能说明：带宽名称
 	BandwidthName *string `json:"bandwidth_name,omitempty"`
 
-	// 带宽大小
+	// - 功能说明：带宽大小
 	BandwidthNumber *int32 `json:"bandwidth_number,omitempty"`
 
-	// 带宽类型
+	// - 功能说明：带宽类型
 	BandwidthType *BandwidthInfoRespBandwidthType `json:"bandwidth_type,omitempty"`
 
-	// 带宽id
+	// - 功能说明：带宽id
 	BandwidthId *string `json:"bandwidth_id,omitempty"`
 }
 
@@ -64,13 +64,18 @@ func (c BandwidthInfoRespBandwidthType) MarshalJSON() ([]byte, error) {
 
 func (c *BandwidthInfoRespBandwidthType) UnmarshalJSON(b []byte) error {
 	myConverter := converter.StringConverterFactory("string")
-	if myConverter != nil {
-		val, err := myConverter.CovertStringToInterface(strings.Trim(string(b[:]), "\""))
-		if err == nil {
-			c.value = val.(string)
-			return nil
-		}
+	if myConverter == nil {
+		return errors.New("unsupported StringConverter type: string")
+	}
+
+	interf, err := myConverter.CovertStringToInterface(strings.Trim(string(b[:]), "\""))
+	if err != nil {
 		return err
+	}
+
+	if val, ok := interf.(string); ok {
+		c.value = val
+		return nil
 	} else {
 		return errors.New("convert enum data to string error")
 	}

@@ -9,13 +9,13 @@ import (
 	"strings"
 )
 
-// 请求数据。
+// ExecuteActionRequestBodyMetadata 请求数据。
 type ExecuteActionRequestBodyMetadata struct {
 
 	// 资源信息。
 	Annotations map[string]string `json:"annotations,omitempty"`
 
-	// action名称。
+	// action名称，具体action如下。 - deploy：部署。 - upgrade：升级。 - configure：生效配置。 - scale：伸缩。 - restart：重启。 - start：启动。 - stop：停止。 - rollback：回滚。
 	Name ExecuteActionRequestBodyMetadataName `json:"name"`
 }
 
@@ -82,13 +82,18 @@ func (c ExecuteActionRequestBodyMetadataName) MarshalJSON() ([]byte, error) {
 
 func (c *ExecuteActionRequestBodyMetadataName) UnmarshalJSON(b []byte) error {
 	myConverter := converter.StringConverterFactory("string")
-	if myConverter != nil {
-		val, err := myConverter.CovertStringToInterface(strings.Trim(string(b[:]), "\""))
-		if err == nil {
-			c.value = val.(string)
-			return nil
-		}
+	if myConverter == nil {
+		return errors.New("unsupported StringConverter type: string")
+	}
+
+	interf, err := myConverter.CovertStringToInterface(strings.Trim(string(b[:]), "\""))
+	if err != nil {
 		return err
+	}
+
+	if val, ok := interf.(string); ok {
+		c.value = val
+		return nil
 	} else {
 		return errors.New("convert enum data to string error")
 	}

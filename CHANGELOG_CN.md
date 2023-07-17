@@ -1,3 +1,1136 @@
+# 0.1.48 2023-07-13
+
+### HuaweiCloud SDK OROAS
+
+- _新增特性_
+  - 支持运筹优化算法服务
+- _解决问题_
+  - 无
+- _特性变更_
+  - 无
+
+### HuaweiCloud SDK AS
+
+- _新增特性_
+  - 支持接口`ListGroupScheduledTasks`、`CreateGroupScheduledTask`、`UpdateGroupScheduledTask`、`DeleteGroupScheduledTask`
+- _解决问题_
+  - 无
+- _特性变更_
+  - **CreateScalingPolicy**
+    - 请求参数变更
+      - `+ scheduled_policy.recurrence_type: enum value [DAILY,WEEKLY,MONTHLY]`
+      - `- scheduled_policy.recurrence_type: enum value [Daily,Weekly,Monthly]`
+  - **UpdateScalingPolicy**
+    - 请求参数变更
+      - `+ scheduled_policy.recurrence_type: enum value [DAILY,WEEKLY,MONTHLY]`
+      - `- scheduled_policy.recurrence_type: enum value [Daily,Weekly,Monthly]`
+  - **ShowScalingPolicy**
+    - 响应参数变更
+      - `+ scaling_policy.scheduled_policy.recurrence_type: enum value [DAILY,WEEKLY,MONTHLY]`
+      - `- scaling_policy.scheduled_policy.recurrence_type: enum value [Daily,Weekly,Monthly]`
+  - **ListScalingPolicies**
+    - 响应参数变更
+      - `+ scaling_policies.scheduled_policy.recurrence_type: enum value [DAILY,WEEKLY,MONTHLY]`
+      - `- scaling_policies.scheduled_policy.recurrence_type: enum value [Daily,Weekly,Monthly]`
+  - **CreateScalingV2Policy**
+    - 请求参数变更
+      - `+ scheduled_policy.recurrence_type: enum value [DAILY,WEEKLY,MONTHLY]`
+      - `- scheduled_policy.recurrence_type: enum value [Daily,Weekly,Monthly]`
+  - **ListAllScalingV2Policies**
+    - 响应参数变更
+      - `+ scaling_policies.scheduled_policy.recurrence_type: enum value [DAILY,WEEKLY,MONTHLY]`
+      - `- scaling_policies.scheduled_policy.recurrence_type: enum value [Daily,Weekly,Monthly]`
+  - **UpdateScalingV2Policy**
+    - 请求参数变更
+      - `+ scheduled_policy.recurrence_type: enum value [DAILY,WEEKLY,MONTHLY]`
+      - `- scheduled_policy.recurrence_type: enum value [Daily,Weekly,Monthly]`
+  - **ShowScalingV2Policy**
+    - 响应参数变更
+      - `+ scaling_policy.scheduled_policy.recurrence_type: enum value [DAILY,WEEKLY,MONTHLY]`
+      - `- scaling_policy.scheduled_policy.recurrence_type: enum value [Daily,Weekly,Monthly]`
+  - **ListScalingV2Policies**
+    - 响应参数变更
+      - `+ scaling_policies.scheduled_policy.recurrence_type: enum value [DAILY,WEEKLY,MONTHLY]`
+      - `- scaling_policies.scheduled_policy.recurrence_type: enum value [Daily,Weekly,Monthly]`
+
+### HuaweiCloud SDK AntiDDoS
+
+- _新增特性_
+  - 无
+- _解决问题_
+  - 无
+- _特性变更_
+  - **ShowNewTaskStatus**
+    - 请求参数变更
+      - `* task_id: optional -> required`
+
+### HuaweiCloud SDK CAE
+
+- _新增特性_
+  - 支持以下接口：
+    - `ListDomains`
+    - `CreateDomain`
+    - `DeleteDomain`
+    - `ListCertificates`
+    - `CreateCertificate`
+    - `UpdateCertificate`
+    - `DeleteCertificate`
+    - `ListTimerRules`
+    - `CreateTimerRule`
+    - `UpdateTimerRule`
+    - `DeleteTimerRule`
+    - `ShowExecutionResult`
+- _解决问题_
+  - 无
+- _特性变更_
+  - **DeleteVolume**
+    - 响应参数变更
+      - `+ kind`
+      - `+ api_version`
+      - `+ items`
+  - **ListAgencies**
+    - 响应参数变更
+      - `+ agencies`
+      - `- items`
+      - `- api_version: enum value [v1]`
+      - `- kind: enum value [Agency]`
+  - **CreateAgency**
+    - 请求参数变更
+      - `- api_version: enum value [v1]`
+      - `- kind: enum value [Agency]`
+      - `- metadata.name: enum value [cae_trust]`
+  - **ListEnvironments**
+    - 响应参数变更
+      - `- items.type`
+      - `- items.status: enum value [error]`
+  - **CreateEnvironment**
+    - 请求参数变更
+      - `- api_version: enum value [v1]`
+      - `- kind: enum value [Environment]`
+      - `- metadata.type`
+    - 响应参数变更
+      - `+ job_id`
+      - `- metadata`
+      - `- kind`
+      - `- api_version`
+  - **CreateApplication**
+    - 请求参数变更
+      - `- api_version: enum value [v1]`
+      - `- kind: enum value [Application]`
+  - **ListApplications**
+    - 响应参数变更
+      - `+ items.annotations`
+      - `+ items.created_at`
+      - `+ items.updated_at`
+  - **ListComponentSnapshots**
+    - 响应参数变更
+      - `- api_version: enum value [v1]`
+      - `- kind: enum value [ComponentSnapshot]`
+      - `+ items.context.app_id`
+      - `+ items.context.available_replica`
+      - `+ items.context.build`
+      - `+ items.context.build_id`
+      - `+ items.context.build_log_id`
+      - `+ items.context.env_id`
+      - `+ items.context.id`
+      - `+ items.context.image_url`
+      - `+ items.context.job_id`
+      - `+ items.context.log_group_id`
+      - `+ items.context.log_stream_id`
+      - `+ items.context.name`
+      - `+ items.context.operation`
+      - `+ items.context.operation_status`
+      - `+ items.context.replica`
+      - `+ items.context.resource_limit`
+      - `+ items.context.runtime`
+      - `+ items.context.source`
+      - `+ items.context.status`
+      - `+ items.context.version`
+      - `+ items.context.created_at`
+      - `+ items.context.updated_at`
+      - `* items.context: object -> object<ComponentSnapshotContext>`
+  - **ListComponentConfigurations**
+    - 响应参数变更
+      - `- kind: enum value [Configuration]`
+      - `+ items.type: enum value [rds,cse,env,access,scaling,volume,healthCheck,lifecycle]`
+  - **CreateComponentConfiguration**
+    - 请求参数变更
+      - `- kind: enum value [Configuration]`
+      - `+ items.type: enum value [rds,cse,env,access,scaling,volume,healthCheck,lifecycle]`
+  - **ListComponentEvents**
+    - 响应参数变更
+      - `- kind: enum value [ComponentEvent]`
+      - `+ items.involved_object_kind`
+      - `- items.involved_object: enum value [Component,ComponentInstance,ComponentScaling]`
+  - **ListComponentInstances**
+    - 响应参数变更
+      - `- api_version: enum value [v1]`
+      - `- kind: enum value [ComponentInstance]`
+  - **ListVolumes**
+    - 请求参数变更
+      - `+ resource_type: enum value [obs]`
+    - 响应参数变更
+      - `- kind: enum value [Volume]`
+      - `- items.resource_type: enum value [obs]`
+  - **CreateVolume**
+    - 请求参数变更
+      - `- kind: enum value [Volume]`
+      - `- spec.resource_type: enum value [obs]`
+  - **RetryJob**
+    - 请求参数变更
+      - `+ X-Enterprise-Project-ID`
+      - `+ X-Environment-ID`
+  - **ShowJob**
+    - 请求参数变更
+      - `+ X-Environment-ID`
+    - 响应参数变更
+      - `- kind: enum value [Job]`
+      - `+ spec.progress`
+  - **ShowComponent**
+    - 响应参数变更
+      - `- api_version: enum value [v1]`
+      - `- kind: enum value [Component]`
+      - `- metadata.jod_id`
+      - `- metadata.status`
+      - `- metadata.type`
+      - `+ spec.resource_limit`
+      - `+ spec.build_log_id`
+      - `- spec.log_strategy`
+      - `+ spec.runtime: enum value [Docker,Java8,Java11,Tomcat8,Tomcat9,Python3,Nodejs8,Php7]`
+  - **UpdateComponent**
+    - 请求参数变更
+      - `- api_version: enum value [v1]`
+      - `- kind: enum value [Component]`
+      - `- metadata.created_at`
+      - `- metadata.id`
+      - `- metadata.jod_id`
+      - `- metadata.status`
+      - `- metadata.type`
+      - `- metadata.updated_at`
+      - `* metadata: object<Metadata> -> object<UpdateComponentRequestMetadata>`
+      - `+ spec.runtime`
+      - `+ spec.replica`
+      - `- spec.log_strategy`
+  - **ExecuteAction**
+    - 请求参数变更
+      - `- api_version: enum value [v1]`
+      - `- kind: enum value [Action]`
+      - `* spec.source: object<Source> -> object<ActionOnComponentSource>`
+  - **CreateComponent**
+    - 请求参数变更
+      - `- api_version: enum value [v1]`
+      - `- kind: enum value [Component]`
+    - 响应参数变更
+      - `- api_version: enum value [v1]`
+      - `- kind: enum value [Component]`
+      - `- metadata.jod_id`
+      - `- metadata.status`
+      - `- metadata.type`
+      - `+ spec.resource_limit`
+      - `- spec.access_info`
+      - `- spec.build_id`
+      - `- spec.image_url`
+      - `- spec.job_id`
+      - `- spec.log_strategy`
+      - `+ spec.runtime: enum value [Docker,Java8,Java11,Tomcat8,Tomcat9,Python3,Nodejs8,Php7]`
+      - `* spec: object<ComponentSpec> -> object<CreateComponentSpec>`
+  - **ListComponents**
+    - 响应参数变更
+      - `+ items.created_at`
+      - `+ items.updated_at`
+      - `- items.status`
+      - `+ items.spec.resource_limit`
+      - `+ items.spec.build_log_id`
+      - `- items.spec.log_strategy`
+      - `+ items.spec.runtime: enum value [Docker,Java8,Java11,Tomcat8,Tomcat9,Python3,Nodejs8,Php7]`
+
+### HuaweiCloud SDK SIS
+
+- _新增特性_
+  - 无
+- _解决问题_
+  - 无
+- _特性变更_
+  - **PushTranscriberJobs**
+    - 请求参数变更
+      - `+ Enterprise-Project-Id`
+
+### HuaweiCloud SDK VPC
+
+- _新增特性_
+  - 支持以下接口：
+    - `ListApiVersion`
+    - `NeutronListPorts`
+    - `NeutronCreatePort`
+    - `NeutronShowPort`
+    - `NeutronUpdatePort`
+    - `NeutronDeletePort`
+    - `NeutronListNetworks`
+    - `NeutronCreateNetwork`
+    - `NeutronShowNetwork`
+    - `NeutronUpdateNetwork`
+    - `NeutronDeleteNetwork`
+    - `NeutronListSubnets`
+    - `NeutronCreateSubnet`
+    - `NeutronShowSubnet`
+    - `NeutronUpdateSubnet`
+    - `NeutronDeleteSubnet`
+    - `NeutronListRouters`
+    - `NeutronCreateRouter`
+    - `NeutronShowRouter`
+    - `NeutronUpdateRouter`
+    - `NeutronDeleteRouter`
+    - `NeutronAddRouterInterface`
+    - `NeutronRemoveRouterInterface`
+- _解决问题_
+  - 无
+- _特性变更_
+  - 无
+
+# 0.1.47 2023-07-06
+
+### HuaweiCloud SDK CodeCheck
+
+- _新增特性_
+  - 无
+- _解决问题_
+  - 无
+- _特性变更_
+  - `CodeCheck`更名为`CodeArtsCheck`
+
+### HuaweiCloud SDK CCE
+
+- _新增特性_
+  - 无
+- _解决问题_
+  - 无
+- _特性变更_
+  - **UpgradeCluster**
+    - 响应参数变更
+      - `+ metadata`
+      - `+ spec`
+      - `- uid`
+
+### HuaweiCloud SDK CDN
+
+- _新增特性_
+  - 无
+- _解决问题_
+  - 无
+- _特性变更_
+  - **ShowDomainDetailByName**
+    - 响应参数变更
+      - `+ domain.sources.weight`
+  - **ShowDomainFullConfig**
+    - 响应参数变更
+      - `+ configs.business_type`
+      - `+ configs.service_area`
+      - `+ configs.sources.weight`
+  - **UpdateDomainFullConfig**
+    - 请求参数变更
+      - `+ configs.business_type`
+      - `+ configs.service_area`
+      - `+ configs.sources.weight`
+
+### HuaweiCloud SDK EVS
+
+- _新增特性_
+  - 无
+- _解决问题_
+  - 无
+- _特性变更_
+  - **CreateVolume**
+    - 请求参数变更
+      - `+ volume.iops`
+      - `+ volume.throughput`
+      - `+ volume.volume_type: enum value [GPSSD2,ESSD2]`
+
+### HuaweiCloud SDK GaussDB
+
+- _新增特性_
+  - 无
+- _解决问题_
+  - 无
+- _特性变更_
+  - **DeleteGaussMySqlReadonlyNode**
+    - 响应参数变更
+      - `+ order_id`
+  - **DeleteGaussMySqlInstance**
+    - 响应参数变更
+      - `+ order_id`
+  - **ShowSqlFilterRule**
+    - 请求参数变更
+      - `+ sql_type`
+      - `- type`
+
+### HuaweiCloud SDK HSS
+
+- _新增特性_
+  - 支持接口`ListJarPackageStatistics`、`ListJarPackageHostInfo`、`ListHostVuls`
+- _解决问题_
+  - 无
+- _特性变更_
+  - **ListProtectionServer**
+    - 响应参数变更
+      - `+ data_list.version`
+      - `+ data_list.vault_id`
+      - `+ data_list.vault_name`
+      - `+ data_list.vault_size`
+      - `+ data_list.vault_used`
+      - `+ data_list.vault_allocated`
+      - `+ data_list.vault_charging_mode`
+      - `+ data_list.vault_status`
+      - `+ data_list.backup_policy_id`
+      - `+ data_list.backup_policy_name`
+      - `+ data_list.backup_policy_enabled`
+      - `+ data_list.resources_num`
+  - **UpdateProtectionPolicy**
+    - 请求参数变更
+      - `+ process_whitelist`
+  - **ListProtectionPolicy**
+    - 请求参数变更
+      - `+ protect_policy_id`
+    - 响应参数变更
+      - `+ data_list.process_whitelist`
+  - **ListRiskConfigs**
+    - 请求参数变更
+      - `+ group_id`
+  - **ListHostStatus**
+    - 响应参数变更
+      - `+ data_list.open_time`
+  - **ListVulnerabilities**
+    - 请求参数变更
+      - `+ repair_priority`
+      - `+ handle_status`
+      - `+ cve_id`
+      - `+ label_list`
+      - `+ status`
+      - `+ asset_value`
+      - `+ group_name`
+    - 响应参数变更
+      - `+ data_list.cve_list`
+      - `+ data_list.patch_url`
+      - `+ data_list.repair_priority`
+      - `+ data_list.hosts_num`
+      - `+ data_list.repair_success_num`
+      - `+ data_list.fixed_num`
+      - `+ data_list.ignored_num`
+  - **ListVulHosts**
+    - 请求参数变更
+      - `+ asset_value`
+      - `+ group_name`
+      - `+ handle_status`
+      - `+ severity_level`
+      - `+ is_affect_business`
+    - 响应参数变更
+      - `+ data_list.agent_id`
+      - `+ data_list.app_path`
+      - `+ data_list.region_name`
+      - `+ data_list.public_ip`
+      - `+ data_list.private_ip`
+      - `+ data_list.group_id`
+      - `+ data_list.group_name`
+      - `+ data_list.os_type`
+      - `+ data_list.asset_value`
+      - `+ data_list.is_affect_business`
+      - `+ data_list.first_scan_time`
+      - `+ data_list.scan_time`
+  - **ChangeVulStatus**
+    - 请求参数变更
+      - `+ remark`
+      - `+ select_type`
+      - `+ type`
+      - `+ host_data_list`
+  - **ListHostProtectHistoryInfo**
+    - 响应参数变更
+      - `+ data_list.file_operation`
+      - `+ data_list.host_name`
+      - `+ data_list.host_ip`
+  - **ListHostRaspProtectHistoryInfo**
+    - 响应参数变更
+      - `+ data_list.host_ip`
+      - `+ data_list.host_name`
+  - **ListHostGroups**
+    - 响应参数变更
+      - `+ data_list.is_outside`
+  - **StartProtection**
+    - 请求参数变更
+      - `+ backup_resources`
+      - `+ create_protection_policy.process_whitelist`
+  - **ListSecurityEvents**
+    - 请求参数变更
+      - `+ event_class_ids`
+  - **ChangeEvent**
+    - 请求参数变更
+      - `+ container_name`
+      - `+ container_id`
+
+### HuaweiCloud SDK IoTEdge
+
+- _新增特性_
+  - 无
+- _解决问题_
+  - 无
+- _特性变更_
+  - **ShowPointTemplate**
+    - 响应参数变更
+      - `* : string -> binary`
+  - **ShowPoints**
+    - 响应参数变更
+      - `* : string -> binary`
+  - **DownloadAppVersion**
+    - 响应参数变更
+      - `* : string -> binary`
+
+### HuaweiCloud SDK LTS
+
+- _新增特性_
+  - 无
+- _解决问题_
+  - 无
+- _特性变更_
+  - **UpdateSqlAlarmRule**
+    - 请求参数变更
+      - `+ notification_save_rule.template_name`
+  - **CreateSqlAlarmRule**
+    - 请求参数变更
+      - `+ notification_save_rule.template_name`
+  - **UpdateKeywordsAlarmRule**
+    - 请求参数变更
+      - `+ notification_save_rule.template_name`
+  - **CreateKeywordsAlarmRule**
+    - 请求参数变更
+      - `+ notification_save_rule.template_name`
+  - **ListAccessConfig**
+    - 响应参数变更
+      - `+ log_split`
+      - `+ binary_collect`
+      - `+ result.log_split`
+      - `+ result.binary_collect`
+      - `+ result.access_config_type: enum value [K8S_CCE]`
+      - `+ result.access_config_detail.stdout`
+      - `+ result.access_config_detail.stderr`
+      - `+ result.access_config_detail.pathType`
+      - `+ result.access_config_detail.namespaceRegex`
+      - `+ result.access_config_detail.podNameRegex`
+      - `+ result.access_config_detail.containerNameRegex`
+      - `+ result.access_config_detail.includeLabels`
+      - `+ result.access_config_detail.excludeLabels`
+      - `+ result.access_config_detail.includeEnvs`
+      - `+ result.access_config_detail.excludeEnvs`
+      - `+ result.access_config_detail.logLabels`
+      - `+ result.access_config_detail.logEnvs`
+      - `+ result.access_config_detail.includeK8sLabels`
+      - `+ result.access_config_detail.excludeK8sLabels`
+      - `+ result.access_config_detail.logK8s`
+      - `* result.access_config_detail.format.single: object<AccessConfigFormatSingle> -> object<AccessConfigFormatSingleCreate>`
+      - `* result.access_config_detail.format.multi: object<AccessConfigFormatMutil> -> object<AccessConfigFormatMutilCreate>`
+      - `* result.access_config_detail.format: object<AccessConfigFormat> -> object<AccessConfigFormatCreate>`
+      - `* result.access_config_detail.windows_log_info: object<AccessConfigWindowsLogInfo> -> object<AccessConfigWindowsLogInfoCreate>`
+      - `* result.access_config_detail: object<AccessConfigDeatil> -> object<AccessConfigDeatilCreate>`
+  - **UpdateAccessConfig**
+    - 请求参数变更
+      - `+ log_split`
+      - `+ binary_collect`
+      - `+ access_config_detail.stdout`
+      - `+ access_config_detail.stderr`
+      - `+ access_config_detail.pathType`
+      - `+ access_config_detail.namespaceRegex`
+      - `+ access_config_detail.podNameRegex`
+      - `+ access_config_detail.containerNameRegex`
+      - `+ access_config_detail.includeLabels`
+      - `+ access_config_detail.excludeLabels`
+      - `+ access_config_detail.includeEnvs`
+      - `+ access_config_detail.excludeEnvs`
+      - `+ access_config_detail.logLabels`
+      - `+ access_config_detail.logEnvs`
+      - `+ access_config_detail.includeK8sLabels`
+      - `+ access_config_detail.excludeK8sLabels`
+      - `+ access_config_detail.logK8s`
+      - `* access_config_detail.format.single: object<AccessConfigFormatSingle> -> object<AccessConfigFormatSingleCreate>`
+      - `* access_config_detail.format.multi: object<AccessConfigFormatMutil> -> object<AccessConfigFormatMutilCreate>`
+      - `* access_config_detail.format: object<AccessConfigFormat> -> object<AccessConfigFormatCreate>`
+      - `* access_config_detail.windows_log_info: object<AccessConfigWindowsLogInfo> -> object<AccessConfigWindowsLogInfoCreate>`
+      - `* access_config_detail: object<AccessConfigDeatil> -> object<AccessConfigDeatilCreate>`
+    - 响应参数变更
+      - `+ log_split`
+      - `+ binary_collect`
+      - `+ access_config_type: enum value [K8S_CCE]`
+      - `+ access_config_detail.stdout`
+      - `+ access_config_detail.stderr`
+      - `+ access_config_detail.pathType`
+      - `+ access_config_detail.namespaceRegex`
+      - `+ access_config_detail.podNameRegex`
+      - `+ access_config_detail.containerNameRegex`
+      - `+ access_config_detail.includeLabels`
+      - `+ access_config_detail.excludeLabels`
+      - `+ access_config_detail.includeEnvs`
+      - `+ access_config_detail.excludeEnvs`
+      - `+ access_config_detail.logLabels`
+      - `+ access_config_detail.logEnvs`
+      - `+ access_config_detail.includeK8sLabels`
+      - `+ access_config_detail.excludeK8sLabels`
+      - `+ access_config_detail.logK8s`
+      - `* access_config_detail.format.single: object<AccessConfigFormatSingle> -> object<AccessConfigFormatSingleCreate>`
+      - `* access_config_detail.format.multi: object<AccessConfigFormatMutil> -> object<AccessConfigFormatMutilCreate>`
+      - `* access_config_detail.format: object<AccessConfigFormat> -> object<AccessConfigFormatCreate>`
+      - `* access_config_detail.windows_log_info: object<AccessConfigWindowsLogInfo> -> object<AccessConfigWindowsLogInfoCreate>`
+      - `* access_config_detail: object<AccessConfigDeatil> -> object<AccessConfigDeatilCreate>`
+  - **CreateAccessConfig**
+    - 请求参数变更
+      - `+ binary_collect`
+      - `+ log_split`
+      - `+ access_config_type: enum value [K8S_CCE]`
+      - `+ access_config_detail.stdout`
+      - `+ access_config_detail.stderr`
+      - `+ access_config_detail.pathType`
+      - `+ access_config_detail.namespaceRegex`
+      - `+ access_config_detail.podNameRegex`
+      - `+ access_config_detail.containerNameRegex`
+      - `+ access_config_detail.includeLabels`
+      - `+ access_config_detail.excludeLabels`
+      - `+ access_config_detail.includeEnvs`
+      - `+ access_config_detail.excludeEnvs`
+      - `+ access_config_detail.logLabels`
+      - `+ access_config_detail.logEnvs`
+      - `+ access_config_detail.includeK8sLabels`
+      - `+ access_config_detail.excludeK8sLabels`
+      - `+ access_config_detail.logK8s`
+    - 响应参数变更
+      - `+ log_split`
+      - `+ binary_collect`
+      - `+ access_config_type: enum value [K8S_CCE]`
+      - `+ access_config_detail.stdout`
+      - `+ access_config_detail.stderr`
+      - `+ access_config_detail.pathType`
+      - `+ access_config_detail.namespaceRegex`
+      - `+ access_config_detail.podNameRegex`
+      - `+ access_config_detail.containerNameRegex`
+      - `+ access_config_detail.includeLabels`
+      - `+ access_config_detail.excludeLabels`
+      - `+ access_config_detail.includeEnvs`
+      - `+ access_config_detail.excludeEnvs`
+      - `+ access_config_detail.logLabels`
+      - `+ access_config_detail.logEnvs`
+      - `+ access_config_detail.includeK8sLabels`
+      - `+ access_config_detail.excludeK8sLabels`
+      - `+ access_config_detail.logK8s`
+      - `* access_config_detail.format.single: object<AccessConfigFormatSingle> -> object<AccessConfigFormatSingleCreate>`
+      - `* access_config_detail.format.multi: object<AccessConfigFormatMutil> -> object<AccessConfigFormatMutilCreate>`
+      - `* access_config_detail.format: object<AccessConfigFormat> -> object<AccessConfigFormatCreate>`
+      - `* access_config_detail.windows_log_info: object<AccessConfigWindowsLogInfo> -> object<AccessConfigWindowsLogInfoCreate>`
+      - `* access_config_detail: object<AccessConfigDeatil> -> object<AccessConfigDeatilCreate>`
+  - **DeleteAccessConfig**
+    - 响应参数变更
+      - `+ log_split`
+      - `+ binary_collect`
+      - `+ result.log_split`
+      - `+ result.binary_collect`
+      - `+ result.access_config_type: enum value [K8S_CCE]`
+      - `+ result.access_config_detail.stdout`
+      - `+ result.access_config_detail.stderr`
+      - `+ result.access_config_detail.pathType`
+      - `+ result.access_config_detail.namespaceRegex`
+      - `+ result.access_config_detail.podNameRegex`
+      - `+ result.access_config_detail.containerNameRegex`
+      - `+ result.access_config_detail.includeLabels`
+      - `+ result.access_config_detail.excludeLabels`
+      - `+ result.access_config_detail.includeEnvs`
+      - `+ result.access_config_detail.excludeEnvs`
+      - `+ result.access_config_detail.logLabels`
+      - `+ result.access_config_detail.logEnvs`
+      - `+ result.access_config_detail.includeK8sLabels`
+      - `+ result.access_config_detail.excludeK8sLabels`
+      - `+ result.access_config_detail.logK8s`
+      - `* result.access_config_detail.format.single: object<AccessConfigFormatSingle> -> object<AccessConfigFormatSingleCreate>`
+      - `* result.access_config_detail.format.multi: object<AccessConfigFormatMutil> -> object<AccessConfigFormatMutilCreate>`
+      - `* result.access_config_detail.format: object<AccessConfigFormat> -> object<AccessConfigFormatCreate>`
+      - `* result.access_config_detail.windows_log_info: object<AccessConfigWindowsLogInfo> -> object<AccessConfigWindowsLogInfoCreate>`
+      - `* result.access_config_detail: object<AccessConfigDeatil> -> object<AccessConfigDeatilCreate>`
+
+### HuaweiCloud SDK Moderation
+
+- _新增特性_
+  - 无
+- _解决问题_
+  - 无
+- _特性变更_
+  - **RunCreateVideoModerationJob**
+    - 请求参数变更
+      - `+ data.language`
+
+### HuaweiCloud SDK RAM
+
+- _新增特性_
+  - 无
+- _解决问题_
+  - 无
+- _特性变更_
+  - **AssociateResourceShare**
+    - 响应参数变更
+      - `+ resource_share_associations.status_message`
+  - **DisassociateResourceShare**
+    - 响应参数变更
+      - `+ resource_share_associations.status_message`
+  - **SearchResourceShareAssociations**
+    - 响应参数变更
+      - `+ resource_share_associations.status_message`
+
+### HuaweiCloud SDK VPC
+
+- _新增特性_
+  - 无
+- _解决问题_
+  - 无
+- _特性变更_
+  - **ListSecurityGroupRules**
+    - 请求参数变更
+      - `+ remote_ip_prefix`
+
+# 0.1.46 2023-06-29
+
+### HuaweiCloud SDK IdentityCenter
+
+- _新增特性_
+  - 支持IAM 身份中心服务
+- _解决问题_
+  - 无
+- _特性变更_
+  - 无
+
+### HuaweiCloud SDK WorkspaceApp
+
+- _新增特性_
+  - 支持云应用服务
+- _解决问题_
+  - 无
+- _特性变更_
+  - 无
+
+### HuaweiCloud SDK Config
+
+- _新增特性_
+  - 支持配置审计服务
+- _解决问题_
+  - 无
+- _特性变更_
+  - 无
+
+### HuaweiCloud SDK AOS
+
+- _新增特性_
+  - 支持接口`ListTemplateVersions`
+- _解决问题_
+  - 无
+- _特性变更_
+  - 无
+
+### HuaweiCloud SDK CC
+
+- _新增特性_
+  - 无
+- _解决问题_
+  - 无
+- _特性变更_
+  - **DeleteTag**
+    - 请求参数变更
+      - `+ resource_type: enum value [cloud-connection,bandwidth-package]`
+      - `+ resource_type: enum value [cc,bwp]`
+  - **ListCloudConnections**
+    - 请求参数变更
+      - `+ used_scene`
+    - 响应参数变更
+      - `+ cloud_connections.tags`
+  - **CreateCloudConnection**
+    - 响应参数变更
+      - `+ cloud_connection.tags`
+  - **ShowCloudConnection**
+    - 响应参数变更
+      - `+ cloud_connection.tags`
+  - **UpdateCloudConnection**
+    - 响应参数变更
+      - `+ cloud_connection.tags`
+  - **ListDomainTags**
+    - 请求参数变更
+      - `+ resource_type: enum value [cloud-connection,bandwidth-package]`
+      - `+ resource_type: enum value [cc,bwp]`
+  - **BatchCreateDeleteTags**
+    - 请求参数变更
+      - `+ resource_type: enum value [cloud-connection,bandwidth-package]`
+      - `+ resource_type: enum value [cc,bwp]`
+  - **ListTags**
+    - 请求参数变更
+      - `+ resource_type: enum value [cloud-connection,bandwidth-package]`
+      - `+ resource_type: enum value [cc,bwp]`
+  - **CreateTag**
+    - 请求参数变更
+      - `+ resource_type: enum value [cloud-connection,bandwidth-package]`
+      - `+ resource_type: enum value [cc,bwp]`
+  - **ListQuotas**
+    - 请求参数变更
+      - `* quota_type: optional -> required`
+  - **CreateBandwidthPackage**
+    - 请求参数变更
+      - `+ bandwidth_package.spec_code`
+  - **ListResourceByFilterTag**
+    - 请求参数变更
+      - `+ resource_type: enum value [cloud-connection,bandwidth-package]`
+      - `+ resource_type: enum value [cc,bwp]`
+
+### HuaweiCloud SDK DCS
+
+- _新增特性_
+  - 支持接口`ExecuteClusterSwitchover`、`ShowJobInfo`
+- _解决问题_
+  - 无
+- _特性变更_
+  - **ListConfigTemplates**
+    - 响应参数变更
+      - `+ config_templates.created_at`
+  - **CreateInstance**
+    - 请求参数变更
+      - `+ template_id`
+
+### HuaweiCloud SDK DSC
+
+- _新增特性_
+  - 无
+- _解决问题_
+  - 无
+- _特性变更_
+  - **CreateProductOrder**
+    - 请求参数变更
+      - `+ charging_mode`
+      - `+ cloud_service_type`
+      - `+ composite_product_id`
+      - `+ discount_id`
+      - `+ is_auto_renew`
+      - `+ period_num`
+      - `+ period_type`
+      - `+ product_infos`
+      - `+ promotion_activity_id`
+      - `+ promotion_info`
+      - `+ region_id`
+      - `- chargingMode`
+      - `- cloudServiceType`
+      - `- compositeProductId`
+      - `- discountId`
+      - `- isAutoRenew`
+      - `- periodNum`
+      - `- periodType`
+      - `- productInfos`
+      - `- promotionActivityId`
+      - `- promotionInfo`
+      - `- regionId`
+  - **ShowSpecification**
+    - 响应参数变更
+      - `* orderInfos.productInfo: list<ProductInfoBean> -> object<ProductInfo>`
+  - **ChangeRule**
+    - 请求参数变更
+      - `* body: object<RuleRequest> -> object<RuleChangeRequest>`
+
+### HuaweiCloud SDK eiHealth
+
+- _新增特性_
+  - 无
+- _解决问题_
+  - 无
+- _特性变更_
+  - 移除以下接口：
+    - `ListDrugJob`
+    - `CancelDrugJob`
+    - `DeleteDrugJob`
+    - `CreateOptmJob`
+    - `ShowOptmJob`
+    - `CreateSynthesisJob`
+    - `ShowSynthesisJob`
+    - `CreateDockingJob`
+    - `ShowDockingJob`
+    - `CreateFepJob`
+    - `ShowFepJob`
+
+### HuaweiCloud SDK GA
+
+- _新增特性_
+  - 支持以下接口：
+    - `ListIpGroups`
+    - `CreateIpGroup`
+    - `ShowIpGroup`
+    - `UpdateIpGroup`
+    - `DeleteIpGroup`
+    - `AddIpGroupIp`
+    - `RemoveIpGroupIp`
+    - `AssociateListener`
+    - `DisassociateListener`
+- _解决问题_
+  - 无
+- _特性变更_
+  - 无
+
+### HuaweiCloud SDK IoTDA
+
+- _新增特性_
+  - 无
+- _解决问题_
+  - 无
+- _特性变更_
+  - **CreateCommand**
+    - 响应参数变更
+      - `+ error_msg`
+      - `+ error_code`
+  - **ListProperties**
+    - 响应参数变更
+      - `+ error_msg`
+      - `+ error_code`
+  - **UpdateProperties**
+    - 响应参数变更
+      - `+ error_msg`
+      - `+ error_code`
+
+### HuaweiCloud SDK ServiceStage
+
+- _新增特性_
+  - 无
+- _解决问题_
+  - 无
+- _特性变更_
+  - 移除接口`ShowComponentConfigurations`、`CreateComponentConfiguration`、`ShowComponentConfiguration`、`CompareComponentConfiguration`
+  - **ModifyApplicationConfiguration**
+    - 响应参数变更
+      - `+ environment_id`
+      - `+ application_id`
+      - `* configuration: list<object> -> object`
+  - **ShowComponentInfo**
+    - 响应参数变更
+      - `- host_aliases`
+      - `- dns_policy`
+      - `- enable_sermant_injection`
+      - `- workload_name`
+      - `- workload_kind`
+      - `- dns_config`
+      - `- pod_labels`
+      - `- security_context`
+      - `- deploy_strategy.rolling_release.termination_seconds`
+      - `- deploy_strategy.rolling_release.fail_strategy`
+      - `- deploy_strategy.gray_release.deployment_mode`
+      - `- deploy_strategy.gray_release.replica_surge_mode`
+      - `- deploy_strategy.gray_release.rule_match_mode`
+      - `- deploy_strategy.gray_release.rules`
+      - `- liveness_probe.period_seconds`
+      - `- liveness_probe.success_threshold`
+      - `- liveness_probe.failure_threshold`
+      - `- liveness_probe.http_headers`
+  - **ModifyComponent**
+    - 请求参数变更
+      - `- pod_labels`
+      - `- enable_sermant_injection`
+      - `- host_aliases`
+      - `- dns_policy`
+      - `- dns_config`
+      - `- security_context`
+      - `- workload_kind`
+      - `- deploy_strategy.rolling_release.termination_seconds`
+      - `- deploy_strategy.rolling_release.fail_strategy`
+      - `- deploy_strategy.gray_release.deployment_mode`
+      - `- deploy_strategy.gray_release.replica_surge_mode`
+      - `- deploy_strategy.gray_release.rule_match_mode`
+      - `- deploy_strategy.gray_release.rules`
+      - `- liveness_probe.period_seconds`
+      - `- liveness_probe.success_threshold`
+      - `- liveness_probe.failure_threshold`
+      - `- liveness_probe.http_headers`
+  - **CreateComponent**
+    - 请求参数变更
+      - `- workload_name`
+      - `- pod_labels`
+      - `- enterprise_project_id`
+      - `- enable_sermant_injection`
+      - `- host_aliases`
+      - `- dns_policy`
+      - `- dns_config`
+      - `- security_context`
+      - `- workload_kind`
+      - `- deploy_strategy.rolling_release.termination_seconds`
+      - `- deploy_strategy.rolling_release.fail_strategy`
+      - `- deploy_strategy.gray_release.deployment_mode`
+      - `- deploy_strategy.gray_release.replica_surge_mode`
+      - `- deploy_strategy.gray_release.rule_match_mode`
+      - `- deploy_strategy.gray_release.rules`
+      - `- liveness_probe.period_seconds`
+      - `- liveness_probe.success_threshold`
+      - `- liveness_probe.failure_threshold`
+      - `- liveness_probe.http_headers`
+  - **ShowComponentsInApplication**
+    - 响应参数变更
+      - `+ components.platform_type`
+  - **ShowComponents**
+    - 响应参数变更
+      - `+ components.platform_type`
+
+### HuaweiCloud SDK VPC
+
+- _新增特性_
+  - 无
+- _解决问题_
+  - 无
+- _特性变更_
+  - **ShowAddressGroup**
+    - 响应参数变更
+      - `+ address_group.tags`
+  - **UpdateAddressGroup**
+    - 响应参数变更
+      - `+ address_group.tags`
+  - **ListAddressGroup**
+    - 响应参数变更
+      - `+ address_groups.tags`
+  - **CreateAddressGroup**
+    - 响应参数变更
+      - `+ address_group.tags`
+
+### HuaweiCloud SDK VPCEP
+
+- _新增特性_
+  - 无
+- _解决问题_
+  - 无
+- _特性变更_
+  - **AddOrRemoveServicePermissions**
+    - 请求参数变更
+      - `+ permission_type`
+    - 响应参数变更
+      - `+ permission_type`
+  - **UpdateEndpointService**
+    - 响应参数变更
+      - `- cidr_type`
+  - **ListServicePermissionsDetails**
+    - 响应参数变更
+      - `+ permissions.permission_type`
+  - **BatchAddEndpointServicePermissions**
+    - 请求参数变更
+      - `+ permission_type`
+    - 响应参数变更
+      - `+ permissions.permission_type`
+  - **BatchRemoveEndpointServicePermissions**
+    - 响应参数变更
+      - `+ permissions.permission_type`
+  - **UpdateEndpointServicePermissionDesc**
+    - 响应参数变更
+      - `+ permissions.permission_type`
+  - **CreateEndpointService**
+    - 响应参数变更
+      - `- cidr_type`
+
+### HuaweiCloud SDK VSS
+
+- _新增特性_
+  - 无
+- _解决问题_
+  - 无
+- _特性变更_
+  - **CancelTasks**
+    - 响应参数变更
+      - `+ task_status: enum value [ready]`
+  - **CreateTasks**
+    - 响应参数变更
+      - `+ task_status: enum value [ready]`
+  - **ShowTasks**
+    - 响应参数变更
+      - `+ task_status: enum value [ready]`
+  - **ListTaskHistories**
+    - 响应参数变更
+      - `+ data.task_status: enum value [ready]`
+
+### HuaweiCloud SDK Workspace
+
+- _新增特性_
+  - 支持以下接口：
+    - `BatchLogoffDesktops`
+    - `ListDesktopsEips`
+    - `ApplyDesktopsInternet`
+    - `AssociateDesktopsEip`
+    - `BatchDisassociateDesktopsEip`
+    - `ListUnusedDesktops`
+    - `ListUsedDesktopInfo`
+    - `ListUserGroups`
+    - `CreateUserGroup`
+    - `BatchDeleteUserGroups`
+    - `UpdateUserGroup`
+    - `DeleteUserGroup`
+    - `RunActionsOnGroup`
+    - `ListUsersOfGroup`
+    - `BatchCreateUsers`
+    - `ResetRandomPassword`
+- _解决问题_
+  - 无
+- _特性变更_
+  - **ListDesktops**
+    - 请求参数变更
+      - `+ pool_id`
+  - **CreateDesktop**
+    - 请求参数变更
+      - `+ eip`
+      - `+ security_groups.name`
+      - `* security_groups: list<SecurityGroupInfo> -> list<SecurityGroup>`
+  - **ResizeDesktop**
+    - 响应参数变更
+      - `+ job_id`
+      - `* jobs: list<ResizeDesktopJobResult> -> list<ResizeDesktopJobResponse>`
+  - **CreateAccessPolicy**
+    - 请求参数变更
+      - `+ policy_objects_list.object_type: enum value [USERGROUP]`
+  - **ListAccessPolicyObjects**
+    - 响应参数变更
+      - `+ policy_objects_list.object_type: enum value [USERGROUP]`
+      - `* policy_objects_list: list<AccessPolicyObjectInfo> -> list<AccessPolicyObject>`
+  - **UpdateAccessPolicyObjects**
+    - 请求参数变更
+      - `+ policy_objects_list.object_type: enum value [USERGROUP]`
+  - **ListProducts**
+    - 响应参数变更
+      - `- products.package_type`
+  - **CreateDesktopUser**
+    - 请求参数变更
+      - `+ active_type`
+      - `+ user_phone`
+      - `+ password`
+      - `* body: object<CreateUserReq> -> object<CreateUserRequest>`
+  - **ListUsers**
+    - 请求参数变更
+      - `+ active_type`
+    - 响应参数变更
+      - `+ users.user_phone`
+      - `+ users.active_type`
+      - `+ users.is_pre_user`
+  - **UpdateUserInfo**
+    - 请求参数变更
+      - `+ user_phone`
+      - `+ active_type`
+  - **ListUserDetail**
+    - 响应参数变更
+      - `+ user_detail.user_phone`
+      - `+ user_detail.active_type`
+      - `+ user_detail.is_pre_user`
+  - **ShowAssistAuthConfig**
+    - 响应参数变更
+      - `+ otp_config_info.apply_rule`
+  - **UpdateAssistAuthMethodConfig**
+    - 请求参数变更
+      - `+ otp_config_info.apply_rule`
+  - **ShowDesktopDetail**
+    - 响应参数变更
+      - `+ desktop.internet_mode`
+      - `+ desktop.is_attaching_eip`
+      - `+ desktop.security_groups.name`
+      - `* desktop.security_groups: list<SecurityGroupInfo> -> list<SecurityGroup>`
+  - **ListDesktopsDetail**
+    - 请求参数变更
+      - `+ pool_id`
+    - 响应参数变更
+      - `+ desktops.internet_mode`
+      - `+ desktops.is_attaching_eip`
+      - `+ desktops.security_groups.name`
+      - `* desktops.security_groups: list<SecurityGroupInfo> -> list<SecurityGroup>`
+
 # 0.1.45 2023-06-21
 
 ### HuaweiCloud SDK KooMessage

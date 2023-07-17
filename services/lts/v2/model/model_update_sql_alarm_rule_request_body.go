@@ -42,7 +42,7 @@ type UpdateSqlAlarmRuleRequestBody struct {
 	DomainId string `json:"domain_id"`
 
 	// 通知主题
-	NotificationSaveRule *NotificationSaveRule `json:"notification_save_rule,omitempty"`
+	NotificationSaveRule *SqlNotificationSaveRule `json:"notification_save_rule,omitempty"`
 
 	// 触发条件：触发次数;默认为1
 	TriggerConditionCount *int32 `json:"trigger_condition_count,omitempty"`
@@ -104,13 +104,18 @@ func (c UpdateSqlAlarmRuleRequestBodySqlAlarmLevel) MarshalJSON() ([]byte, error
 
 func (c *UpdateSqlAlarmRuleRequestBodySqlAlarmLevel) UnmarshalJSON(b []byte) error {
 	myConverter := converter.StringConverterFactory("string")
-	if myConverter != nil {
-		val, err := myConverter.CovertStringToInterface(strings.Trim(string(b[:]), "\""))
-		if err == nil {
-			c.value = val.(string)
-			return nil
-		}
+	if myConverter == nil {
+		return errors.New("unsupported StringConverter type: string")
+	}
+
+	interf, err := myConverter.CovertStringToInterface(strings.Trim(string(b[:]), "\""))
+	if err != nil {
 		return err
+	}
+
+	if val, ok := interf.(string); ok {
+		c.value = val
+		return nil
 	} else {
 		return errors.New("convert enum data to string error")
 	}
@@ -151,13 +156,18 @@ func (c UpdateSqlAlarmRuleRequestBodySqlAlarmSendCode) MarshalJSON() ([]byte, er
 
 func (c *UpdateSqlAlarmRuleRequestBodySqlAlarmSendCode) UnmarshalJSON(b []byte) error {
 	myConverter := converter.StringConverterFactory("int32")
-	if myConverter != nil {
-		val, err := myConverter.CovertStringToInterface(strings.Trim(string(b[:]), "\""))
-		if err == nil {
-			c.value = val.(int32)
-			return nil
-		}
+	if myConverter == nil {
+		return errors.New("unsupported StringConverter type: int32")
+	}
+
+	interf, err := myConverter.CovertStringToInterface(strings.Trim(string(b[:]), "\""))
+	if err != nil {
 		return err
+	}
+
+	if val, ok := interf.(int32); ok {
+		c.value = val
+		return nil
 	} else {
 		return errors.New("convert enum data to int32 error")
 	}
